@@ -2,10 +2,16 @@ import graph.graphloader as gl
 from interaction import interactor, model, opinion
 from neighborhood import algorithms
 import collections
+import os
+from dotenv import find_dotenv
+from dotenv import load_dotenv
+
+env_file = find_dotenv(".env.dev")
+load_dotenv(env_file)
 
 
 def run():
-    dataset = gl.GraphLoader("D:/Study/RumorDatasets/facebook_combined.txt/facebook_combined.txt")
+    dataset = gl.GraphLoader(os.getenv('FILE_PATH'))
     SIRModel = model.SIR(dataset.G)
     opinion_updater = opinion.opinion_updater(0.2)
     interaction = interactor()
